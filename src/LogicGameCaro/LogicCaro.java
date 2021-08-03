@@ -4,6 +4,9 @@
  */
 package LogicGameCaro;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -13,6 +16,15 @@ import javax.swing.JLabel;
  */
 public class LogicCaro {
 	
+	FileLogic fileLogic = new FileLogic();
+	/**
+	 * 
+	 * @param jButton
+	 * @param jLabel
+	 * @param textButton
+	 * @param textLabel
+	 * @return
+	 */
 	public int setValue(JButton jButton, JLabel jLabel, String textButton, String textLabel) {
 		int confirm;
 		jButton.setText(textButton);
@@ -25,51 +37,22 @@ public class LogicCaro {
 		return confirm;
 	}
 	
+	/**
+	 * 
+	 * @param jButtonTwo
+	 * @return
+	 */
 	public int confirmTickOrNO(JButton jButtonTwo) {
 		int confirm = 0;
 		if(jButtonTwo.getText().equals("x") || jButtonTwo.getText().equals("o")) {
 			confirm = 1;
 		}
 		if(!jButtonTwo.getText().equals("x") && !jButtonTwo.getText().equals("o")) {
-			confirm = 2;
+			confirm = 0;
 		}
 		return confirm;
 	}
-	/**
-	 * cách này  hay
-	 * @param row
-	 * @param column
-	 * @param jButton
-	 * @return
-	 *
-	 */
-	public String[][] getMatrixAttackOrDefence(int row, int column, JButton jButton[][]){
-		float rowOne = row - 4, 
-		      rowTwo = row + 4, 
-			  columnOne = column - 4, 
-			  columnTwo = column + 4;
-		int l= 0, m = 0;
-		String[][] matrix = new String[9][9];
-			for(float i = rowOne; i <= rowTwo; i++) {
-				for(float j = columnOne; j <= columnTwo; j++) {
-					if(i < 0 || j < 0 || i > 19 || j > 19) {
-						matrix[l][m] = "i";
-						m++;
-					}else if(i >= 0 || j >=0) {
-						matrix[l][m] = jButton[(int)i][(int)j].getText();
-						m++;
-					}
-					if(m == 9) {
-						l++;
-						m = 0;
-					}
-					if(l == 9) {
-						break;
-					}
-				}
-			}
-		return matrix;
-	}
+	
 	
 	/**
 	 * kiểm tra thắng
@@ -157,10 +140,69 @@ public class LogicCaro {
 	        }
 	 }
 	 
-	 /**
-	  * duyet nhung truong hop nguy hiem
-	  * @param arrayOfMatrix
-	  *
-	  */
+	 public int compareTwoMatrix(String[][] matrixFile, String[][] matrixGui) {
+		 int count = 0;
+		 int index = 0;
+		 int confirm = 0;
+		 for(int i = 0; i < 5; i++) {
+			 for(int j = 0; j < 5; j++) {
+				 if(matrixFile[i][j].equals("T") && matrixGui[i][j].equals(" ")) {
+					 count ++;
+					 confirm = i + 1;
+				 }else if(matrixFile[i][j].equals("G") && (matrixGui[i][j].equals(" ") || matrixGui[i][j].equals("X") || matrixGui[i][j].equals("O"))) {
+					 count ++;
+				 }else if(matrixFile[i][j].equals("D") && matrixGui[i][j].equals(" ")) {
+					 count ++;
+				 }else if(matrixFile[i][j].equals(matrixGui[i][j])) {
+					 count ++;
+				 }
+			 }
+		 }
+		 if(count == 25) {
+			 index = confirm;
+		 }
+		 return index;
+	 }
+	 public String[][] getMatrixAttackOrDefence(int row, int column, JButton[][] jButton){
+		float rowOne = row - 2, 
+		      rowTwo = row + 2, 
+			  columnOne = column - 2, 
+			  columnTwo = column + 2;
+		int rowMatrix= 0, colMatrix = 0;
+		String[][] matrix = new String[9][9];
+			for(float ro = rowOne; ro <= rowTwo; ro++) {
+				for(float co = columnOne; co <= columnTwo; co++) {
+					matrix[rowMatrix][colMatrix] = jButton[(int)ro][(int)co].getText();
+					colMatrix++;
+					if(colMatrix == 5) {
+						rowMatrix++;
+						colMatrix = 0;
+					}
+					if(rowMatrix == 5) {
+						break;
+					}
+				}
+			}
+		return matrix;
+	}
+	 public void setMatrix5(JButton[][] jButton) {
+		 String[][][] dataOfMatrix20;
+		 for(int i = 2; i < 18; i++) {
+			 for(int j = 2; j < 18; j++) {
+				 String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);
+				 
+			 }
+		 }
+	 }
+	 public void compareFileAndMatrix(JButton jButton) throws FileNotFoundException, IOException {
+		 String[][][] dataFile = fileLogic.getArray3();
+		 for(int index = 0; index < dataFile.length; index ++) {
+			 for(int row = 0; row < 5; row ++) {
+				 for(int column = 0; column < 5; column ++) {
+					 
+				 }
+			 }
+		 }
+	 }
 
 }
