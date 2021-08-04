@@ -19,14 +19,22 @@ import ViewGameCaro.GuiCaro;
 public class NewGame implements ActionListener{
 	
 	GuiCaro guiCaroNew;
+	
+	/**
+	 * tương tác với phần view
+	 * @param guiCaro : đối tượng GuiCaro
+	 *
+	 */
 	public NewGame(GuiCaro guiCaro) {
 		this.guiCaroNew = guiCaro;
 	}
 	
 	LogicCaro logicCaro = new LogicCaro();
+	
+	/**
+	 * xử lí sự kiện khi nhận được sự kiện tạo game mới khi đó set lại toàn bộ text của button về kí tự trống
+	 */
 	public void actionPerformed(ActionEvent e) {
-		logicCaro.newGameCaro(guiCaroNew.arraySquare, 20);
-		//logicCaro.newGameCaro(guiCaroNew.arr, 9);
-		guiCaroNew.count = 0;
+		logicCaro.newGameCaro(guiCaroNew.arraySquare, 20);  // gọi hàm tạo game mới
 	}
 }

@@ -25,9 +25,13 @@ public class ShowNotification {
 	        JOptionPane.showMessageDialog(frame, "Bạn đã thua máy", "Kết quả chơi", JOptionPane.INFORMATION_MESSAGE);   // thông báo cho biết người chơi thua
 		}else if(win == 3) {                               // nếu máy thắng
 	        JOptionPane.showMessageDialog(frame, "Ô này đã được nhập rồi", "Thông báo", JOptionPane.INFORMATION_MESSAGE);   // thông báo cho biết người chơi thua
+		}else if(win == 4) {                               // nếu máy thắng
+	        JOptionPane.showMessageDialog(frame, "Máy không tìm thấy nước để đánh", "Thông báo", JOptionPane.INFORMATION_MESSAGE);   // thông báo cho biết người chơi thua
+		}else if(win == 5) {                               // nếu máy thắng
+	        JOptionPane.showMessageDialog(frame, "Hoà - Hẹn tái đấu lần sau", "Thông báo", JOptionPane.INFORMATION_MESSAGE);   // thông báo cho biết người chơi thua
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);  // tắt luôn chương trình
-
+		System.exit(0);
 	}
 	
 

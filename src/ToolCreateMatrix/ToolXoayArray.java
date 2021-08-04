@@ -2,7 +2,7 @@
  * Copyright(C)2011 Luvina Software Company
  * ToolXoayArray.java Aug 4, 2021 doducthuan
  */
-package ToolArray;
+package ToolCreateMatrix;
 import java.io.File;
 
 import java.io.BufferedReader;
@@ -31,7 +31,7 @@ public class ToolXoayArray {
 	 *
 	 */
 	public int getLengthArray3() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\ToolArray\\File\\fileNguon.txt");
+		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\File\\fileNguon.txt");
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -52,7 +52,7 @@ public class ToolXoayArray {
 	 *
 	 */
 	public String[][][] readFileAndGetData() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\ToolArray\\File\\fileNguon.txt");
+		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\File\\fileNguon.txt");
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -92,7 +92,7 @@ public class ToolXoayArray {
 	
 	
 	public void writeFiles(String[][] array) throws FileNotFoundException, IOException{
-		File writeFile = new File("src\\ToolArray\\File\\fileDich.txt");
+		File writeFile = new File("src\\ToolCreateMatrix\\File\\fileDich.txt");
 		FileOutputStream fileOutputStream = null;
 		fileOutputStream = new FileOutputStream(writeFile,true);
 		for(int i = 0; i < 5; i++) {
@@ -114,6 +114,79 @@ public class ToolXoayArray {
 		return array;
 	}
 	
+	
+	///////////////////////////////////////////////////////đảo //////////////////////////////////////////
+	public String[][] swapMatrix1(String[][] arr){
+		String[][] array = new String[5][5];
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+			    if(i != 0 && i != 1) {
+			    	array[i][j] = arr[i][j];
+			    }else {
+			    	if(i == 0) {
+			    		array[0][j] = arr[1][j];
+			    	}else {
+			    		array[1][j] = arr[0][j];
+			    	}
+			    }
+			}
+		}
+		return array;
+	}
+	
+	
+	public String[][] swapMatrix2(String[][] arr){
+		String[][] array = new String[5][5];
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+			    if(i != 0 && i != 2) {
+			    	array[i][j] = arr[i][j];
+			    }else {
+			    	if(i == 0) {
+			    		array[0][j] = arr[2][j];
+			    	}else {
+			    		array[2][j] = arr[0][j];
+			    	}
+			    }
+			}
+		}
+		return array;
+	}
+	public String[][] swapMatrix3(String[][] arr){
+		String[][] array = new String[5][5];
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+			    if(i != 0 && i != 3) {
+			    	array[i][j] = arr[i][j];
+			    }else {
+			    	if(i == 0) {
+			    		array[0][j] = arr[3][j];
+			    	}else {
+			    		array[3][j] = arr[0][j];
+			    	}
+			    }
+			}
+		}
+		return array;
+	}
+	public String[][] swapMatrix4(String[][] arr){
+		String[][] array = new String[5][5];
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+			    if(i != 0 && i != 4) {
+			    	array[i][j] = arr[i][j];
+			    }else {
+			    	if(i == 0) {
+			    		array[0][j] = arr[4][j];
+			    	}else {
+			    		array[4][j] = arr[0][j];
+			    	}
+			    }
+			}
+		}
+		return array;
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public void xoayAllAndWriFile(String[][] array) throws FileNotFoundException, IOException{
 		writeFiles(array);
 		String[][] array1 = xoayArray90(array);
@@ -128,6 +201,14 @@ public class ToolXoayArray {
 		String[][][] matrix = readFileAndGetData();
 		for(String[][] array : matrix) {
 			xoayAllAndWriFile(array);
+			String[][] array1 = swapMatrix1(array);
+			xoayAllAndWriFile(array1);
+			String[][] array2 = swapMatrix1(array);
+			xoayAllAndWriFile(array2);
+			String[][] array3 = swapMatrix1(array);
+			xoayAllAndWriFile(array3);
+			String[][] array4 = swapMatrix1(array);
+			xoayAllAndWriFile(array4);
 		}
 	}
 	

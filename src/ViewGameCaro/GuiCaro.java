@@ -27,26 +27,25 @@ import ControllerGameCaro.*;
  *
  */
 public class GuiCaro {
-	ControllerCaro controllerCaro = new ControllerCaro(this);
-	NewGame newGame = new NewGame(this);
-	public static final int ROW = 20, COLUMN = 20;
-	public int count = 2;
-	public int rowMatrixMax, columnMatrixMax, countUser, countComputer;
+	ControllerCaro controllerCaro = new ControllerCaro(this);              // tạo đối tượng để thực hiện lệnh khi có sự kiện được lắng nghe ( sau khi người đáh thì máy đanh )
+	NewGame newGame = new NewGame(this);                                   // tạo đối tượng để thực hiện lệnh khi có sự kiện được lắng nghe ( Game mới )                            
+	// hàng và cột của ma trận lớn , nếu muốn thay đổi số hàng và số cột chỉ cần thay đổi gia trị trong này
+	public static final int ROW = 20, COLUMN = 20;                          
+	public int confirmSpill = 0;                    // kiểm tra xem các button đã được đánh hết hay chưa
 	
 	
 	JFrame jFrameCaro = new JFrame("Luvina - Đỗ Đức Thuận - Game Caro");   // tạo 1 khung JFrame chức tất cả các hiển thị cho người chơi xem
 	JPanel panelCenter = new JPanel();                                    // tạo JPanel chứa 400 ô button để chơi caro
 	JPanel test = new JPanel();
 	public JButton arraySquare[][] = new JButton[20][20];                        // tạo mảng hai chiều button với kích thước 20x20 để chơi caro
-    public JButton arr[][] = new JButton[9][9];
+                                 
 	
-	JLabel labelIconCute = new JLabel();                                    
-	JLabel labelTurn = new JLabel("Đến lượt", SwingConstants.CENTER);
-	public JLabel labelUserPlay = new JLabel("Bạn", SwingConstants.CENTER);
-	JLabel labelIconCute2 = new JLabel();
-	JButton buttonExit = new JButton("Thoát trò chơi");
+	JLabel labelIconCute = new JLabel();          // tạo đối tương JLabel        gán icon cute                    
+	JLabel labelTurn = new JLabel("Đến lượt", SwingConstants.CENTER);     // tạo đối tương để gán text thông báo đến lượt ai chơi
+	public JLabel labelUserPlay = new JLabel("Bạn", SwingConstants.CENTER);   //  tạo đối tương thông báo ai sẽ điieefn
+	JLabel labelIconCute2 = new JLabel();                          // tạo đối tượgn JLabel để gán icon vào
+	JButton buttonExit = new JButton("Thoát trò chơi");           // tạo button có chứ năng khởi tạo trò chơi mới
 	JButton buttonNewGame = new JButton("Trò chơi mới");
-	JButton buttonRedo = new JButton("Đi lại");
 	/**
 	 * hàm khởi tạo giao diện cho tròn chơi caro
 	 * 
@@ -57,18 +56,15 @@ public class GuiCaro {
 
 		
 		jFrameCaro.add(panelCenter);                                      // thêm panelCenter vào trong JFrame
-		jFrameCaro.add(labelIconCute);
-		jFrameCaro.add(labelTurn);
-		jFrameCaro.add(labelUserPlay);
-		jFrameCaro.add(labelIconCute2);
-		//jFrameCaro.add(test);
-		jFrameCaro.add(buttonNewGame);
-		//jFrameCaro.add(buttonRedo);
-		//jFrameCaro.add(buttonExit);
+		jFrameCaro.add(labelIconCute);                                   // thêm labelIconCute vào JFrame
+		jFrameCaro.add(labelTurn);                                       // thêm labelTurn vào JFrame
+		jFrameCaro.add(labelUserPlay);                                   // thêm labelUserPlay vào JFrame
+		jFrameCaro.add(labelIconCute2);                                  // thêm labelIconCute2
+		jFrameCaro.add(buttonNewGame);                                   // thêm buttonNewGame vào JFrame
 		
 		
-		jFrameCaro.setLayout(new FlowLayout());
-		jFrameCaro.getContentPane().setBackground(new Color(255,235,205));  //Whatever color
+		jFrameCaro.setLayout(new FlowLayout());                         // set Layout cho JFrame
+		jFrameCaro.getContentPane().setBackground(new Color(255,235,205));  // thiết lập màu cho JFrame
 		jFrameCaro.setLayout(new BorderLayout());                         // thiết lập bố cục để các phần khác không bị nhảy ra ngoài tiêu chuẩn kích thước của nó
 		jFrameCaro.setSize(1300, 870);                                    // xét kích thước cho JFrame: để chiều rộng là 816 vì khoảng cách các button nhỏ lúc chia sẽ có độ giãn cách nhỏ
 		
@@ -81,11 +77,11 @@ public class GuiCaro {
 		for (int i = 0; i < 20; i++) {                                   // duyệt qua các hàng
             for (int j = 0; j < 20; j++) {                               // duyệt qua các cột
                 arraySquare[i][j] = new JButton(" ");                       //khởi tạo từng jbutton
-                arraySquare[i][j].setBackground(new Color(220, 220, 220));
-                arraySquare[i][j].setMargin(new Insets(0, 0, 0, 0));
-                arraySquare[i][j].setFont(new Font("Serif", Font.PLAIN, 25));
+                arraySquare[i][j].setBackground(new Color(220, 220, 220));  // thiếp lập màu cho các button
+                arraySquare[i][j].setMargin(new Insets(0, 0, 0, 0));     // thiết lập khoảng cách của chữ cho vừa với kích thước của khung button
+                arraySquare[i][j].setFont(new Font("Serif", Font.PLAIN, 25)); // thiết lập font chữ trong text của button
                 panelCenter.add(arraySquare[i][j]);                     //  add button vào panelCenter
-                arraySquare[i][j].addActionListener(controllerCaro);
+                arraySquare[i][j].addActionListener(controllerCaro);    // nhận sự kiện
             }
         }
 		//-------------------------------------------------------------------------------------------------------------------//
@@ -93,41 +89,27 @@ public class GuiCaro {
 		
 		
 		
-//		test.setBounds(900,350,360,360);                            // xét vị trí và kích thước cho panelCenter( nằm bên dưới có chiều dài và chiều rộng bằng 800 )
-//		test.setLayout(new GridLayout(9, 9));                   // để panelCenter chia thành các khoảng diện tích bằng nhau cụ thể là có 20 x 20 ô vuông
-//		for (int i = 0; i < 9; i++) {                                   // duyệt qua các hàng
-//            for (int j = 0; j < 9; j++) {                               // duyệt qua các cột
-//                arr[i][j] = new JButton(" ");                       //khởi tạo từng jbutton
-//                arr[i][j].setMargin(new Insets(0, 0, 0, 0));
-//                arr[i][j].setFont(new Font("Serif", Font.PLAIN, 25));
-//                test.add(arr[i][j]);                     //  add button vào panelCenter
-//            }
-//        }
-		
 		//----------------------------- xét nửa bên phải - nơi chứa icon, thông báo, lựa chọn cho người chơi ----------------//
 		
-		labelIconCute.setBounds(900, 20, 250, 200);
-		labelIconCute.setIcon(new ImageIcon(new ImageIcon("images/tym2.gif").getImage().getScaledInstance(250, 200, Image.SCALE_DEFAULT)));
+		labelIconCute.setBounds(900, 20, 250, 200);                     // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		labelIconCute.setIcon(new ImageIcon(new ImageIcon("images/tym2.gif").getImage().getScaledInstance(250, 200, Image.SCALE_DEFAULT)));  // thêm ảnh động vào labelIconCute
 		
-		labelTurn.setBounds(980, 220, 150, 50);
-		labelTurn.setFont(new Font("Serif", Font.PLAIN, 30));
+		labelTurn.setBounds(980, 220, 150, 50);                  // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		labelTurn.setFont(new Font("Serif", Font.PLAIN, 30));   // thiết lập font chữ cho JLabel
        
 		
-		labelUserPlay.setBounds(980, 270, 150, 50);
-		labelUserPlay.setBackground(new Color(50, 205, 50));
-        labelUserPlay.setOpaque(true);
-		labelUserPlay.setFont(new Font("Serif", Font.PLAIN, 30));
+		labelUserPlay.setBounds(980, 270, 150, 50);    // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		labelUserPlay.setBackground(new Color(50, 205, 50));  // thiết lập màu nền
+        labelUserPlay.setOpaque(true); // bật khung label
+		labelUserPlay.setFont(new Font("Serif", Font.PLAIN, 30));   // thiết lập font chữ
 		
-		labelIconCute2.setBounds(870, 350, 400, 240);
-		labelIconCute2.setIcon(new ImageIcon(new ImageIcon("images/456.jpg").getImage().getScaledInstance(400, 240, Image.SCALE_DEFAULT)));
+		labelIconCute2.setBounds(870, 350, 400, 240);          // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		labelIconCute2.setIcon(new ImageIcon(new ImageIcon("images/456.jpg").getImage().getScaledInstance(400, 240, Image.SCALE_DEFAULT)));  // gán ảnh cho label
 		
 		
-		buttonNewGame.setBounds(910, 600, 300, 50);
-		buttonNewGame.setBounds(910, 750, 300, 50);
-
-		buttonNewGame.addActionListener(newGame);
-		buttonRedo.setBounds(910, 670, 300, 50);
-		buttonExit.setBounds(910, 740, 300, 50);
+		//buttonNewGame.setBounds(910, 600, 300, 50);  // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		buttonNewGame.setBounds(910, 750, 300, 50);   // thiết lập vị trí, toạ đọ x, y và kích thước của đối tượng
+		buttonNewGame.addActionListener(newGame);  // nhận sự kiện
 		
 		//------------------------------------------------------------------------------------------------------------------------//
 		

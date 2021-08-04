@@ -2,7 +2,7 @@
  * Copyright(C)2011 Luvina Software Company
  * Data.java Aug 4, 2021 doducthuan
  */
-package ToolArray;
+package ToolCreateMatrix;
 
 /**
  * @author doducthuan

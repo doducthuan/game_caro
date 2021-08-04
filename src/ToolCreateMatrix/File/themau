@@ -1,0 +1,133 @@
+// NGUY HIEM CAP 1
+X T X X X
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+X X T X X
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+X X X T X
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+T X X X X
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+G D G G G
+G D G G G
+G X G G G
+G X G G G
+X T X X D
+
+G G D G G
+G G D G G
+G G X G G
+G G X G G
+X X T X D
+
+D G G G G
+D G G G G
+X G G G G
+X G G G G
+T X X D D
+
+
+// KHONG DAO////////////////////////////////////////////
+
+X G G G G
+G T G G G
+G G X G G
+G G G X G
+G G G G X
+
+T G G G G
+G X G G G
+G G X G G
+G G G X G
+G G G G G
+
+G G G G T
+G G G X G
+G G X G G
+G X G G G
+G G G G G
+
+
+G G G G G
+G G G X G
+G G X G G
+G X G G G
+T G G G G
+
+G G G G G
+G X G G G
+G G X G G
+G G G X G
+G G G G T
+
+X G G G G
+G X G G G
+G G T G G
+G G G X G
+G G G G X
+
+///////////////////////////////////
+
+
+
+
+// CAP 2/////////////////
+T X X X G
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+X T X X G
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+X X X T G
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+X X X G T
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+// NGUY HIEN CAP 3
+
+G X X G T
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+G X X G T
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+
+G G X T G
+G G G G G
+G G G G G
+G G G G G
+G G G G G
+

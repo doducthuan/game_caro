@@ -15,20 +15,23 @@ public class DataManagement {
 	private String dataMatrix[][][];
 	private int length;
 	/**
-	 * @return the length
+	 * trả về độ dài mảng 3 chiều
+	 * @return the length : độ dài của mảng 3 chiều
 	 */
 	public int getLength() {
 		return length;
 	}
 
 	/**
-	 * @param length the length to set
+	 * thiết lập giá trị độ dài mảng 3 chiều
+	 * @param length the length to set : 
 	 */
 	public void setLength(int length) {
 		this.length = length;
 	}
 
 	/**
+	 * 
 	 * trả về mảng 3 chiều
 	 * @return the dataMatrix
 	 */

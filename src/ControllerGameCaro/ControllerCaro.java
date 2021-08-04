@@ -23,18 +23,19 @@ import LogicGameCaro.*;
 public class ControllerCaro implements ActionListener{
 	
 	GuiCaro guiCaro;
+	
+	/**
+	 * tương tác với phần giao diện
+	 * @param guiCaro  đối tượng tương tác
+	 *
+	 */
 	public ControllerCaro(GuiCaro guiCaro) {
 		this.guiCaro = guiCaro;
 	}
 	
-	ShowNotification showNotification = new ShowNotification();
-	LogicCaro logicCaro = new LogicCaro();
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	ShowNotification showNotification = new ShowNotification();/// khởi tạo các đối tượng để gọi đến các hàm liên quan của đối tượng đó
+	LogicCaro logicCaro = new LogicCaro();         // khởi tạo đối tượg để xử lí phần logic
 	
-	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * xử lí khi lắng nghe được 1 sự kiện 
 	 */
@@ -42,32 +43,37 @@ public class ControllerCaro implements ActionListener{
 		loop:
 		for (int i = 0; i < GuiCaro.ROW; i++) {                                   // duyệt qua các hàng
             for (int j = 0; j < GuiCaro.COLUMN; j++) {                               // duyệt qua các cột
-            	int confirm = logicCaro.confirmTickOrNO(guiCaro.arraySquare[i][j]);
-            	if(e.getSource() == guiCaro.arraySquare[i][j] && confirm == 1) {
-            		showNotification.NotificationEndGame(3);
-            	}else if(e.getSource() == guiCaro.arraySquare[i][j] && confirm == 2) {
-            		if(guiCaro.count % 2 == 0) {
-            			guiCaro.arraySquare[i][j].setText("X");
-            			if(logicCaro.winCaro(i, j, guiCaro.arraySquare, "X")) {
-            				showNotification.NotificationEndGame(1);
-            				System.exit(0);
-            			}
-            			guiCaro.labelUserPlay.setText("May");	
-            			try {
-	            			logicCaro.compareFileAndMatrix(guiCaro.arraySquare);
-	            			int row1 = logicCaro.getRowMa() , col1 = logicCaro.getColMa();           			
-	            			guiCaro.arraySquare[row1][col1].setText("O");
-	            			if(logicCaro.winCaro(row1, col1, guiCaro.arraySquare, "X")) {
-	            				showNotification.NotificationEndGame(2);
-	            				System.exit(0);
+            	int confirm = logicCaro.confirmTickOrNO(guiCaro.arraySquare[i][j]);   // gọi hàm kiểm tra xem 1 ô đã được tích hay chưa
+            	if(e.getSource() == guiCaro.arraySquare[i][j] && confirm == 1) {      // nếu được tích rồi
+            		showNotification.NotificationEndGame(3);                       // thông báo ô đã được tích
+            	}else if(e.getSource() == guiCaro.arraySquare[i][j] && confirm == 2) {         // nếu chưa được tích
+        			guiCaro.arraySquare[i][j].setText("X");                          // gán kí tự X vào text của buttton vừa nhấn
+        			if(logicCaro.winCaro(i, j, guiCaro.arraySquare, "X")) {         // sau khi tích thì kiểm tra chiến thắng
+        				showNotification.NotificationEndGame(1);                   // in thông báo chiến thắng
+        			}
+        			guiCaro.confirmSpill ++;
+        			guiCaro.labelUserPlay.setText("May");	        // khi đánh xong thiết lập text của JLabel thể hiện đến lượt máy đánh
+        			try {                                       // bước  vào phần xử lí máy đánh
+            			int confirmCoicide = logicCaro.compareFileAndMatrix(guiCaro.arraySquare);    // gọi hàm để máy thực hiện đánh hàm này tạo ra toạ độ chính xác ô cần đánh ( file JavaBean để lưu)
+            			if(confirmCoicide == 0) {
+            				showNotification.NotificationEndGame(4);
+            			}else {
+	            			int row1 = logicCaro.getRowMa() , col1 = logicCaro.getColMa();    // gọi toạ độ đã được tạo ở bên trên          			
+	            			guiCaro.arraySquare[row1][col1].setText("O");                     // gán kí tự O vào toạ độ cần đánh
+	            			if(logicCaro.winCaro(row1, col1, guiCaro.arraySquare, "O")) {    // kiểm tra chiến thắng
+	            				showNotification.NotificationEndGame(2);                  // in thông báo                
 	            			}
-	            			guiCaro.labelUserPlay.setText("Ban");
-            			}catch(Exception e1) {
-            				System.out.println(e1);
+	            			guiCaro.confirmSpill++;
+	            			
+	            			guiCaro.labelUserPlay.setText("Ban");     // máy đánh xong thì set lại text cho JLabel để thông báo đến lượt người chơi đánh
             			}
-            		
+        			}catch(Exception e1) {                      // nhận ngoại lệ
+        				System.out.println(e1);                  // in ngoại lệ
+        			}
+            		if(guiCaro.confirmSpill == 400) {
+            			showNotification.NotificationEndGame(5);
             		}
-            		break loop;
+            		break loop;                     // nếu đánh xong thì thoát luôn khỏi vòng lặt đôi sử dụng giống như kiểu 1 lênh jump
             	}
             }
 		}
