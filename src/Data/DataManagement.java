@@ -12,8 +12,8 @@ package Data;
  */
 public class DataManagement {
 	// mảng 3 chiều chứa các ma trận được đọc từ file thế cờ
-	String dataMatrix[][][];
-	int length;
+	private String dataMatrix[][][];
+	private int length;
 	/**
 	 * @return the length
 	 */

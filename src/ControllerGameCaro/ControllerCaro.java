@@ -3,7 +3,6 @@
  * ControllerCaro.java Jul 30, 2021
  */
 package ControllerGameCaro;
-//import java.io.IOException;
 
 import java.awt.event.ActionListener;
 //import java.io.FileNotFoundException;
@@ -36,6 +35,9 @@ public class ControllerCaro implements ActionListener{
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * xử lí khi lắng nghe được 1 sự kiện 
+	 */
 	public void actionPerformed(ActionEvent e) {
 		loop:
 		for (int i = 0; i < GuiCaro.ROW; i++) {                                   // duyệt qua các hàng
@@ -46,26 +48,20 @@ public class ControllerCaro implements ActionListener{
             	}else if(e.getSource() == guiCaro.arraySquare[i][j] && confirm == 2) {
             		if(guiCaro.count % 2 == 0) {
             			guiCaro.arraySquare[i][j].setText("X");
-            			guiCaro.labelUserPlay.setText("May");
-            				
+            			if(logicCaro.winCaro(i, j, guiCaro.arraySquare, "X")) {
+            				showNotification.NotificationEndGame(1);
+            				System.exit(0);
+            			}
+            			guiCaro.labelUserPlay.setText("May");	
             			try {
 	            			logicCaro.compareFileAndMatrix(guiCaro.arraySquare);
-	            			//int[] toaDo = logicCaro.getCoordinates();
-	            			int row1 = logicCaro.getRowMa() , col1 = logicCaro.getColMa();
-//	            			for(int a = 0; a < 2; a++) {
-//	            				if(a == 0) {
-//	            					//row1 = toaDo[a];
-//	            					row1 = 2;
-//	            				}
-//	            				if(a == 1) {
-//	            					//col1 = toaDo[a];
-//	            					col1 = 2;
-//	            				}
-//	            			}
+	            			int row1 = logicCaro.getRowMa() , col1 = logicCaro.getColMa();           			
 	            			guiCaro.arraySquare[row1][col1].setText("O");
+	            			if(logicCaro.winCaro(row1, col1, guiCaro.arraySquare, "X")) {
+	            				showNotification.NotificationEndGame(2);
+	            				System.exit(0);
+	            			}
 	            			guiCaro.labelUserPlay.setText("Ban");
-	            			//guiCaro.count = 2;
-	            			//break loop;
             			}catch(Exception e1) {
             				System.out.println(e1);
             			}
