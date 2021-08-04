@@ -10,8 +10,8 @@ package Data;
  */
 public class DataOfMatrix {
 	
-	public int toaDoRow;
-	public int toaDoColumn;
+	private int toaDoRow;
+	private int toaDoColumn;
 	/**
 	 * @return the toaDoRow
 	 */
@@ -36,8 +36,8 @@ public class DataOfMatrix {
 	public void setToaDoColumn(int toaDoColumn) {
 		this.toaDoColumn = toaDoColumn;
 	}
-	public float rowMatrix;
-	public float columnMatrix;
+	private float rowMatrix;
+	private float columnMatrix;
 	/**
 	 * @return the rowMatrix
 	 */

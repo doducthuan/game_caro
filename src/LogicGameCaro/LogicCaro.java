@@ -186,16 +186,16 @@ public class LogicCaro {
 	  *
 	  */
 	 public String[][] getMatrixAttackOrDefence(int row, int column, JButton[][] jButton){
-		float rowOne = row - 2, 
+		int rowOne = row - 2, 
 		      rowTwo = row + 2, 
 			  columnOne = column - 2, 
 			  columnTwo = column + 2;
 		int rowMatrix= 0, colMatrix = 0;
 		String[][] matrix = new String[5][5];
 		loop:
-			for(float ro = rowOne; ro <= rowTwo; ro++) {
-				for(float co = columnOne; co <= columnTwo; co++) {
-					matrix[rowMatrix][colMatrix] = jButton[(int)ro][(int)co].getText();
+			for(int ro = rowOne; ro <= rowTwo; ro++) {
+				for(int  co = columnOne; co <= columnTwo; co++) {
+					matrix[rowMatrix][colMatrix] = jButton[ro][co].getText();
 					colMatrix++;
 					if(colMatrix == 5) {
 						rowMatrix++;
@@ -219,7 +219,7 @@ public class LogicCaro {
 	 public void compareFileAndMatrix(JButton[][] jButton) throws FileNotFoundException, IOException {
 		 String[][][] dataFile = fileLogic.getArray3();
 		 int index = 0;
-		 outerloop:
+		
 //		 for(int i = 2; i < 18; i++) {
 //			 for(int j = 2; j < 18; j++) {
 //				 String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);
@@ -233,6 +233,7 @@ public class LogicCaro {
 //				 }
 //			 }
 //		 }
+		outerloop:
 		for(String[][] matrixFi : dataFile) {
 			for(int i = 2; i < 18; i++) {
 				for(int j = 2; j < 18; j ++) {
@@ -248,17 +249,26 @@ public class LogicCaro {
 		}
 	 }
 	 
-	 public int[] getCoordinates() {
-		 int[] coor = new int[2];
-		 for(int i = 0; i < 2; i++) {
-			 if(i == 0) {
-				 coor[i] = dataOfMatrix.getToaDoRow(); 
-			 }
-			 if(i == 2) {
-				 coor[i] = dataOfMatrix.getToaDoColumn(); 
-			 }
-		 }
-		 return coor;
+//	 public int[] getCoordinates() {
+//		 int[] coor = new int[2];
+//		 for(int i = 0; i < 2; i++) {
+//			 if(i == 0) {
+//				 coor[i] = dataOfMatrix.getToaDoRow(); 
+//			 }
+//			 if(i == 2) {
+//				 coor[i] = dataOfMatrix.getToaDoColumn(); 
+//			 }
+//		 }
+//		 return coor;
+//	 }
+	 public int getRowMa() {
+		 int c = dataOfMatrix.getToaDoRow();
+		 return c;
+	 }
+	 
+	 public int getColMa() {
+		 int c = dataOfMatrix.getToaDoColumn();
+		 return c;
 	 }
 
 }
