@@ -6,7 +6,7 @@ package LogicGameCaro;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import Data.DataOfMatrix;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 public class LogicCaro {
 	
 	FileLogic fileLogic = new FileLogic();
+	DataOfMatrix dataOfMatrix = new DataOfMatrix();
 	/**
 	 * 
 	 * @param jButton
@@ -48,7 +49,7 @@ public class LogicCaro {
 			confirm = 1;
 		}
 		if(!jButtonTwo.getText().equals("x") && !jButtonTwo.getText().equals("o")) {
-			confirm = 0;
+			confirm = 2;
 		}
 		return confirm;
 	}
@@ -140,15 +141,23 @@ public class LogicCaro {
 	        }
 	 }
 	 
+	 /**
+	  * so sánh hai ma trận
+	  * @param matrixFile
+	  * @param matrixGui
+	  * @return
+	  *
+	  */
 	 public int compareTwoMatrix(String[][] matrixFile, String[][] matrixGui) {
 		 int count = 0;
 		 int index = 0;
-		 int confirm = 0;
+		 int ro = 0, col = 0;
 		 for(int i = 0; i < 5; i++) {
 			 for(int j = 0; j < 5; j++) {
 				 if(matrixFile[i][j].equals("T") && matrixGui[i][j].equals(" ")) {
 					 count ++;
-					 confirm = i + 1;
+					 ro = i;
+					 col = j;
 				 }else if(matrixFile[i][j].equals("G") && (matrixGui[i][j].equals(" ") || matrixGui[i][j].equals("X") || matrixGui[i][j].equals("O"))) {
 					 count ++;
 				 }else if(matrixFile[i][j].equals("D") && matrixGui[i][j].equals(" ")) {
@@ -159,17 +168,31 @@ public class LogicCaro {
 			 }
 		 }
 		 if(count == 25) {
-			 index = confirm;
+			 index = 1;
+			 dataOfMatrix.setColumnMatrix(2-col);
+			 dataOfMatrix.setRowMatrix(2- ro);
+		 }else {
+			 index = 0;
 		 }
 		 return index;
 	 }
+	 
+	 /**
+	  * tạo ma trận 5*5 từ toạ độ của bàn cờ
+	  * @param row
+	  * @param column
+	  * @param jButton
+	  * @return
+	  *
+	  */
 	 public String[][] getMatrixAttackOrDefence(int row, int column, JButton[][] jButton){
 		float rowOne = row - 2, 
 		      rowTwo = row + 2, 
 			  columnOne = column - 2, 
 			  columnTwo = column + 2;
 		int rowMatrix= 0, colMatrix = 0;
-		String[][] matrix = new String[9][9];
+		String[][] matrix = new String[5][5];
+		loop:
 			for(float ro = rowOne; ro <= rowTwo; ro++) {
 				for(float co = columnOne; co <= columnTwo; co++) {
 					matrix[rowMatrix][colMatrix] = jButton[(int)ro][(int)co].getText();
@@ -179,30 +202,63 @@ public class LogicCaro {
 						colMatrix = 0;
 					}
 					if(rowMatrix == 5) {
-						break;
+						break loop;
 					}
 				}
 			}
 		return matrix;
 	}
-	 public void setMatrix5(JButton[][] jButton) {
-		 String[][][] dataOfMatrix20;
-		 for(int i = 2; i < 18; i++) {
-			 for(int j = 2; j < 18; j++) {
-				 String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);
-				 
-			 }
-		 }
-	 }
-	 public void compareFileAndMatrix(JButton jButton) throws FileNotFoundException, IOException {
+	 
+	 /**
+	  * so sánh thế cờ với bàn cờ
+	  * @param jButton
+	  * @throws FileNotFoundException
+	  * @throws IOException
+	  *
+	  */
+	 public void compareFileAndMatrix(JButton[][] jButton) throws FileNotFoundException, IOException {
 		 String[][][] dataFile = fileLogic.getArray3();
-		 for(int index = 0; index < dataFile.length; index ++) {
-			 for(int row = 0; row < 5; row ++) {
-				 for(int column = 0; column < 5; column ++) {
-					 
-				 }
+		 int index = 0;
+		 outerloop:
+//		 for(int i = 2; i < 18; i++) {
+//			 for(int j = 2; j < 18; j++) {
+//				 String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);
+//				 for(String[][] matrixFi : dataFile) {
+//					 index = compareTwoMatrix(matrixFi, matrix5);
+//					 if(index > 0) {
+//						 dataOfMatrix.setToaDoRow(i - (int)dataOfMatrix.getRowMatrix() );
+//						 dataOfMatrix.setToaDoColumn(j - (int)dataOfMatrix.getColumnMatrix());
+//						 break outerloop;
+//					 }
+//				 }
+//			 }
+//		 }
+		for(String[][] matrixFi : dataFile) {
+			for(int i = 2; i < 18; i++) {
+				for(int j = 2; j < 18; j ++) {
+					String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);
+					index = compareTwoMatrix(matrixFi, matrix5);
+					if(index > 0) {
+						dataOfMatrix.setToaDoRow(i - (int)dataOfMatrix.getRowMatrix() );
+						dataOfMatrix.setToaDoColumn(j - (int)dataOfMatrix.getColumnMatrix());
+						break outerloop;
+					}
+				}
+			}
+		}
+	 }
+	 
+	 public int[] getCoordinates() {
+		 int[] coor = new int[2];
+		 for(int i = 0; i < 2; i++) {
+			 if(i == 0) {
+				 coor[i] = dataOfMatrix.getToaDoRow(); 
+			 }
+			 if(i == 2) {
+				 coor[i] = dataOfMatrix.getToaDoColumn(); 
 			 }
 		 }
+		 return coor;
 	 }
 
 }

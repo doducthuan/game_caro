@@ -9,20 +9,58 @@ package Data;
  *
  */
 public class DataOfMatrix {
-	public String[][][] matrixOfMatrix;
-
+	
+	public int toaDoRow;
+	public int toaDoColumn;
 	/**
-	 * @return the matrixOfMatrix
+	 * @return the toaDoRow
 	 */
-	public String[][][] getMatrixOfMatrix() {
-		return matrixOfMatrix;
+	public int getToaDoRow() {
+		return toaDoRow;
 	}
-
 	/**
-	 * @param matrixOfMatrix the matrixOfMatrix to set
+	 * @param toaDoRow the toaDoRow to set
 	 */
-	public void setMatrixOfMatrix(String[][][] matrixOfMatrix) {
-		this.matrixOfMatrix = matrixOfMatrix;
+	public void setToaDoRow(int toaDoRow) {
+		this.toaDoRow = toaDoRow;
+	}
+	/**
+	 * @return the toaDoColumn
+	 */
+	public int getToaDoColumn() {
+		return toaDoColumn;
+	}
+	/**
+	 * @param toaDoColumn the toaDoColumn to set
+	 */
+	public void setToaDoColumn(int toaDoColumn) {
+		this.toaDoColumn = toaDoColumn;
+	}
+	public float rowMatrix;
+	public float columnMatrix;
+	/**
+	 * @return the rowMatrix
+	 */
+	public float getRowMatrix() {
+		return rowMatrix;
+	}
+	/**
+	 * @param rowMatrix the rowMatrix to set
+	 */
+	public void setRowMatrix(float rowMatrix) {
+		this.rowMatrix = rowMatrix;
+	}
+	/**
+	 * @return the columnMatrix
+	 */
+	public float getColumnMatrix() {
+		return columnMatrix;
+	}
+	/**
+	 * @param columnMatrix the columnMatrix to set
+	 */
+	public void setColumnMatrix(float columnMatrix) {
+		this.columnMatrix = columnMatrix;
 	}
 	
 }

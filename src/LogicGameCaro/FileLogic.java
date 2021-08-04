@@ -47,8 +47,8 @@ public class FileLogic {
 	 *
 	 */
 	public void readFileAndGetData() throws FileNotFoundException, IOException{
-		//FileInputStream fileInputStream = new FileInputStream("src\\Data\\TheCo\\theco.txt");
-		FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
+		FileInputStream fileInputStream = new FileInputStream("src\\Data\\TheCo\\theco.txt");
+		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 		int length = dataManagement.getLength();
@@ -86,7 +86,7 @@ public class FileLogic {
 	}
 	
 	
-	public int abc() throws FileNotFoundException, IOException {
+	public int lenOfArray3() throws FileNotFoundException, IOException {
 		getLengthArray3();
 		return dataManagement.getLength();
 	}
@@ -94,19 +94,19 @@ public class FileLogic {
 	
 	
 	// test
-	public static void main(String args[]) throws FileNotFoundException, IOException{
-		FileLogic fileLogic = new FileLogic();
-		//int le = fileLogic.abc();
-		String a [][][] = fileLogic.getArray3();
-		for(int k  = 0; k < a.length; k++) {
-			for(int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-					System.out.print(a[k][i][j] + " ");
-				}
-				System.out.println("");
-			}
-			System.out.println("");
-		}
-	}
+//	public static void main(String args[]) throws FileNotFoundException, IOException{
+//		FileLogic fileLogic = new FileLogic();
+//		//int le = fileLogic.abc();
+//		String a [][][] = fileLogic.getArray3();
+//		for(int k  = 0; k < a.length; k++) {
+//			for(int i = 0; i < 5; i++) {
+//				for (int j = 0; j < 5; j++) {
+//					System.out.print(a[k][i][j] + " ");
+//				}
+//				System.out.println("");
+//			}
+//			System.out.println("");
+//		}
+//	}
 	
 }

@@ -30,7 +30,7 @@ public class GuiCaro {
 	ControllerCaro controllerCaro = new ControllerCaro(this);
 	NewGame newGame = new NewGame(this);
 	public static final int ROW = 20, COLUMN = 20;
-	public int count = 0;
+	public int count = 2;
 	public int rowMatrixMax, columnMatrixMax, countUser, countComputer;
 	
 	
