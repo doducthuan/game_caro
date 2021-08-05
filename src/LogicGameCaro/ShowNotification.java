@@ -17,7 +17,7 @@ public class ShowNotification {
 	 * @param win : = 1 thì người chơi thắng,
 	 *              = 0 thì người chơi thua.
 	 */
-	public void NotificationEndGame(int win) {
+	public void notificationEndGame(int win) {
 		JFrame frame = new JFrame();          // tạo khung thông báo
 		if(win == 1) {                        // nếu người chơi thắng
 	        JOptionPane.showMessageDialog(frame, "Bạn đã thắng máy", "Kết quả chơi", JOptionPane.INFORMATION_MESSAGE);  // thông báo cho biết người chơi thắng
@@ -31,7 +31,6 @@ public class ShowNotification {
 	        JOptionPane.showMessageDialog(frame, "Hoà - Hẹn tái đấu lần sau", "Thông báo", JOptionPane.INFORMATION_MESSAGE);   // thông báo cho biết người chơi thua
 		}
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);  // tắt luôn chương trình
-		System.exit(0);
 	}
 	
 

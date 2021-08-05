@@ -27,7 +27,7 @@ public class FileLogic {
 	 *
 	 */
 	public void getLengthArray3() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\Data\\TheCo\\theco1.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
+		FileInputStream fileInputStream = new FileInputStream("src\\Data\\fileDich.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);            // truyền đối tượng fileInputStream vào làm tham số cho đối tượng InputStreamReader
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);               // sử dụng đối tượng BufferedReader để đọc file
@@ -47,7 +47,7 @@ public class FileLogic {
 	 *
 	 */
 	public void readFileAndGetData() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\Data\\TheCo\\theco1.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
+		FileInputStream fileInputStream = new FileInputStream("src\\Data\\fileDich.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);           // truyền đối tượng fileInputStream vào làm tham số cho đối tượng InputStreamReader
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);          // sử dụng đối tượng BufferedReader để đọc file
@@ -56,7 +56,7 @@ public class FileLogic {
 		String lines = "";      // khởi tạo lines rỗnmg để đọc từng dòng
 		int index = 0, row = 0;   // số index là chỉ số của mảng 3 chiều vào row là index hảng của phần tử mảng hai chiều trong mảng 3 chiều
         while((lines = bufferedReader.readLine()) != null){     // đọc từng dòng đến hết
-        	String line[] = lines.split(" ");        // tách riêng phần tử bằng khoảng trống
+        	String line[] = lines.split("");        // tách riêng phần tử bằng khoảng trống
         	for(int i = 0; i < line.length; i++) {
         		arrayContainingMatrix[index][row][i] = line[i];     // gán mỗi phần tử đó vào 1 mảng 2 chiều trong mảng 3 chiều
         	}
@@ -88,10 +88,10 @@ public class FileLogic {
 	/*
 	 * trả về độ dài của mảng 3 chiều ( không cần thiết lắm ) 
 	 */
-	public int lenOfArray3() throws FileNotFoundException, IOException {
-		getLengthArray3();  // gọi hàm tính độ dài mảng 3 chiều
-		return dataManagement.getLength();   // trả về độ dài mảng 3 chiều
-	}
+//	public int lenOfArray3() throws FileNotFoundException, IOException {
+//		getLengthArray3();  // gọi hàm tính độ dài mảng 3 chiều
+//		return dataManagement.getLength();   // trả về độ dài mảng 3 chiều
+//	}
 
 	
 }
