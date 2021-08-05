@@ -31,7 +31,7 @@ public class ToolXoayArray {
 	 *
 	 */
 	public int getLengthArray3() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\File\\fileNguon.txt");
+		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\final\\3O.txt");
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -52,7 +52,8 @@ public class ToolXoayArray {
 	 *
 	 */
 	public String[][][] readFileAndGetData() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\File\\fileNguon.txt");
+		FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\final\\3O.txt");
+		//FileInputStream fileInputStream = new FileInputStream("src\\ToolCreateMatrix\\File\\fileNguon.txt");
 		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -63,7 +64,12 @@ public class ToolXoayArray {
         while((lines = bufferedReader.readLine()) != null){
         	String line[] = lines.split("");
         	for(int i = 0; i < line.length; i++) {
+//        		if(line[i].equals("O")) {
+//        			arrayContainingMatrix[index][row][i] = "X";
+//        		}else {
         		arrayContainingMatrix[index][row][i] = line[i];
+        		//}
+        		
         	}
         	row ++;
         	if(row == 5) {
@@ -92,8 +98,9 @@ public class ToolXoayArray {
 	
 	
 	public void writeFiles(String[][] array) throws FileNotFoundException, IOException{
-		File writeFile = new File("src\\ToolCreateMatrix\\File\\fileDich.txt");
-		//File writeFile = new File("src\\ToolCreateMatrix\\File\\duongCheo.txt");
+		//File writeFile = new File("src\\ToolCreateMatrix\\final\\3X.txt");
+		File writeFile = new File("src\\Data\\fileDich.txt");
+		//File writeFile = new File("src\\Data\\fileDich.txt");
 		FileOutputStream fileOutputStream = null;
 		fileOutputStream = new FileOutputStream(writeFile,true);
 		for(int i = 0; i < 5; i++) {
@@ -215,12 +222,13 @@ public class ToolXoayArray {
 	public void writeMatrixToFile() throws FileNotFoundException, IOException {
 		String[][][] matrix = readFileAndGetData();
 		for(String[][] array : matrix) {
+			//writeFiles(array);
+		
 			
-//			
-			String[][] arr = chuyen(array);
-			xoayAllAndWriFile(arr);
 			
 			xoayAllAndWriFile(array);
+			String[][] arr = chuyen(array);
+			xoayAllAndWriFile(arr);
 			String[][] array1 = swapMatrix1(array);
 			xoayAllAndWriFile(array1);
 			String[][] array2 = swapMatrix1(array);
@@ -230,8 +238,6 @@ public class ToolXoayArray {
 			String[][] array4 = swapMatrix1(array);
 			xoayAllAndWriFile(array4);
 //			
-			//
-			
 			
 		}
 	}

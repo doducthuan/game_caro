@@ -204,10 +204,12 @@ public class LogicCaro {
 		 int index = 0;     // chỉ số kiểm tra hai ma trận có giống không
 		 int confirm = 0;
 		outerloop:            // nhảy thoát ra khỏi vòng lặp 
-		for(String[][] matrixFi : dataFile) {      //  lấy từng ma trận thế cờ
+			for(String[][] matrixFi : dataFile) { //  lấy từng ma trận thế cờ
 			for(int i = 2; i < 18; i++) {         // vị trí hàng băt đầu từ hàng 2 và kết thúc 18
 				for(int j = 2; j < 18; j ++) {    // vị trí cột bắt đầu từ 2 và kết thúc 18
+					
 					String[][] matrix5 = getMatrixAttackOrDefence(i, j, jButton);   // gọi hàm tạo ma trận từ các vị trí được thiết lập+
+					//for(String[][] matrixFi : dataFile) { //  lấy từng ma trận thế cờ
 					index = compareTwoMatrix(matrixFi, matrix5);        // so sánh hai ma trận và trả về 1 số int để kiểm tra có giống nhau không
 					if(index > 0) {   // nếu giống
 						dataOfMatrix.setToaDoRow(i - (int)dataOfMatrix.getRowMatrix() );           // lưu vị trí hàng cần đánh

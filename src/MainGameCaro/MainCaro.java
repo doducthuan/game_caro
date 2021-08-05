@@ -23,5 +23,4 @@ public class MainCaro {
 		guiCaro.guiGameCaro();                  // gọi hàm khởi tạo giao diện
 
 	}
-
 }
