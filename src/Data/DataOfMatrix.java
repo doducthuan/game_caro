@@ -5,6 +5,8 @@
 package Data;
 
 /**
+ * 
+ * chứ dữ liệu của vị trí hàng vào cột vị trí máy cần đánh
  * @author doducthuan
  *
  */

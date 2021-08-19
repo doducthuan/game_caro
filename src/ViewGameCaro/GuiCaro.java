@@ -3,7 +3,7 @@
  * GuiCaro.java Jul 30, 2021
  */
 package ViewGameCaro;
-
+import java.awt.Dimension;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -23,14 +23,16 @@ import java.awt.Insets;
 
 import ControllerGameCaro.*;
 /**
+ * khởi tạo giao diện cho game caro
  * @author Admin
  *
  */
 public class GuiCaro {
 	ControllerCaro controllerCaro = new ControllerCaro(this);              // tạo đối tượng để thực hiện lệnh khi có sự kiện được lắng nghe ( sau khi người đáh thì máy đanh )
 	NewGame newGame = new NewGame(this);                                   // tạo đối tượng để thực hiện lệnh khi có sự kiện được lắng nghe ( Game mới )                            
-	// hàng và cột của ma trận lớn , nếu muốn thay đổi số hàng và số cột chỉ cần thay đổi gia trị trong này
-	public static final int ROW = 20, COLUMN = 20;                          
+	
+	public static final int ROW = 20, COLUMN = 20;      // hàng và cột của ma trận lớn , nếu muốn thay đổi số hàng và số cột chỉ cần thay đổi gia trị trong này     
+	public static final int SIZE_O_CO = 40;             // kích thước của 1 ô cờ
 	public int confirmSpill = 0;                    // kiểm tra xem các button đã được đánh hết hay chưa
 	
 	
@@ -79,6 +81,7 @@ public class GuiCaro {
                 arraySquare[i][j] = new JButton(" ");                       //khởi tạo từng jbutton
                 arraySquare[i][j].setBackground(new Color(220, 220, 220));  // thiếp lập màu cho các button
                 arraySquare[i][j].setMargin(new Insets(0, 0, 0, 0));     // thiết lập khoảng cách của chữ cho vừa với kích thước của khung button
+                arraySquare[i][j].setPreferredSize(new Dimension(SIZE_O_CO, SIZE_O_CO));
                 arraySquare[i][j].setFont(new Font("Serif", Font.PLAIN, 25)); // thiết lập font chữ trong text của button
                 panelCenter.add(arraySquare[i][j]);                     //  add button vào panelCenter
                 arraySquare[i][j].addActionListener(controllerCaro);    // nhận sự kiện

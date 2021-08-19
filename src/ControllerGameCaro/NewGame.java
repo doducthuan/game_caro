@@ -13,6 +13,8 @@ import LogicGameCaro.LogicCaro;
 import ViewGameCaro.GuiCaro;
 
 /**
+ * 
+ * nhận sự kiện gọi hàm xử lí tạo game mới
  * @author Admin
  *
  */

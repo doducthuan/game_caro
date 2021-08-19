@@ -10,29 +10,15 @@ import Data.DataOfMatrix;            // thêm đối tượng tự tạo
 import javax.swing.JButton;          // thêm JButton
 
 /**
+ * 
+ * xử lí logic cho máy đánh cờ
  * @author doducthuan
  *
  */
 public class LogicCaro {
 	
-	FileLogic fileLogic = new FileLogic();
-	DataOfMatrix dataOfMatrix = new DataOfMatrix();
-	/**
-	 * kiểm tra xem 1 nút đã được tính trước đó hay chưa
-	 * @param jButtonTwo
-	 * @return
-	 */
-	public int confirmTickOrNO(JButton jButtonTwo) {
-		int confirm = 0;
-		if(jButtonTwo.getText().equals("X") || jButtonTwo.getText().equals("O")) {   // nếu một nút đã được tích thì gán giá trị confirm = 1
-			confirm = 1;      // gán giá trị
-		}
-		if(!jButtonTwo.getText().equals("X") && !jButtonTwo.getText().equals("O")) {  // nếu chưa được tích gán giá trị confirm = 2
-			confirm = 2;    // gán giá trị
-		}
-		return confirm;    // trả về giá trị confirm để xác nhận
-	}
-	
+	FileLogic fileLogic = new FileLogic();                 // gọi đối tượng FileLogic để chạy các hàm lấy dữ liệu
+	DataOfMatrix dataOfMatrix = new DataOfMatrix();         // 1 java beam để lần lưu và lấy dữ liệu
 	
 	/**
 	 * kiểm tra thắng
@@ -47,6 +33,8 @@ public class LogicCaro {
 	 public boolean winCaro(int row, int column, JButton jButton[][], String name) {
 	        int k, j;     
 	        int d = 0;  // biến đếm số kí tự giống nhau liên tiếp
+	        
+	        // xét hàng dọc
 	        for (k = -4; k <= 4; k++) {      // khởi tạo giá trị vào lặp để kiểm tra quanh phạm vi ma trận 9*9
 	        	
 	            if (row + k >= 0 && row + k < 20) {   // để cho vị trí kiểm tra khong vượt ngoài ngoài ma trạn 5*5
@@ -62,9 +50,10 @@ public class LogicCaro {
 	        } else {
 	            d = 0;    // còn không thiết lập lại giá trị và tiếp tục xét theo hàng ngang
 	        }
-	        //xet ngang
 	        
-	        /////////////////sửa  ////////////////////////////////
+	        
+	        //xét hàng ngang
+	        
 	        for (k = -4; k <= 4; k++) {               // xét hang ngang phạm vi ma trận 
 	            if (column + k >= 0 && column + k < 20) {  // kiểm tra để không bị tràn ra khỏi ma trận 5*5
 	                if (jButton[row][column + k].getText() == name) {    // kiểm tra giá trị truỳng  lặp liên tiếp
@@ -79,7 +68,9 @@ public class LogicCaro {
 	        } else {         // còn không
 	            d = 0;        // thiết lặp lại bằng 0
 	        }
-	        //cheo
+	        
+	        
+	        // xét đường chéo
 	        for (k = -4, j = 4; k <= 4 && j >= -4; k++, j--) {            // kiểm tra đườnng chép
 	            if (column + k >= 0 && column + k < 20 && row + j >= 0 && row + j < 20) {  // xác nhận để vị trí không tràn
 	                if (jButton[row + j][column + k].getText() == name) {      // nếu trùng
@@ -111,9 +102,9 @@ public class LogicCaro {
 	 
 	 
 	 /**
-	  * tạo game mới
-	  * @param jButton
-	  * @param n
+	  * tạo game mới, sẽ gán " " cho text của button
+	  * @param jButton" 1 mảng các button
+	  * @param n : số lượnt button
 	  *
 	  */
 	 public void newGameCaro(JButton jButton[][], int n) {
@@ -123,6 +114,7 @@ public class LogicCaro {
 	            }
 	        }
 	 }
+	 
 	 
 	 /**
 	  * so sánh hai ma trận 5*5
@@ -137,13 +129,16 @@ public class LogicCaro {
 		 int ro = 0, col = 0;               // thiết lập toạ độ vị trí cần đánh
 		 for(int i = 0; i < 5; i++) {       //  tạo vòng lặp for cho dòng
 			 for(int j = 0; j < 5; j++) {   // tạo vòng lặp for cho cột
-				 if(matrixFile[i][j].equals("T") && matrixGui[i][j].equals(" ")) {        // nếu vị trí ma trận trong file  = T và trong ma trận máy là rỗng thì
+				 if(matrixFile[i][j].equals("T") && matrixGui[i][j].equals(" ")) {        
+					 // nếu vị trí ma trận trong file  = T và trong ma trận máy là rỗng thì
 					 count ++;              // tăng giá trị đếm
 					 ro = i;          //  thiết lập vị trí hàng cần đánh
 					 col = j;          // thiếp lập trị trí cột cần đáh
-				 }else if(matrixFile[i][j].equals("G") && (matrixGui[i][j].equals(" ") || matrixGui[i][j].equals("X") || matrixGui[i][j].equals("O"))) {  // nếu vị trí ma trận trong file  = G và trong ma trận máy là kí tự nào đi nữa thì
+				 }else if(matrixFile[i][j].equals("G") && (matrixGui[i][j].equals(" ") || matrixGui[i][j].equals("X") || matrixGui[i][j].equals("O"))) { 
+					 // nếu vị trí ma trận trong file  = G và trong ma trận máy là kí tự nào đi nữa thì
 					 count ++;  // tăng giá trị trùng
-				 }else if(matrixFile[i][j].equals("D") && matrixGui[i][j].equals(" ")) {  // nếu vị trí ma trận trong file  = D và trong ma trận máy là rỗng thì
+				 }else if(matrixFile[i][j].equals("D") && matrixGui[i][j].equals(" ")) {  
+					 // nếu vị trí ma trận trong file  = D và trong ma trận máy là rỗng thì
 					 count ++;  // tăng giá trị giống
 				 }else if(matrixFile[i][j].equals(matrixGui[i][j])) {   // hai vị trí giống nhau
 					 count ++;             // tăng giá trị trùng nhau

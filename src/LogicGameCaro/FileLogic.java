@@ -17,8 +17,28 @@ import Data.DataManagement;
  */
 public class FileLogic {
 	
-	DataManagement dataManagement = new DataManagement();
+	DataManagement dataManagement = new DataManagement();      // tạo đói tương DataManagement 1 java beam để lưu mảng 3 chiều và độ dài mảng 3 chiều
+	
+	private String pathFile="src\\Data\\theco.txt";  // địa chỉ file thế cờ
+	
 	/**
+	 * trả về 1 BufferedReader để đọc file
+	 * @return  bufferedReader
+	 * @throws FileNotFoundException : ngoại lệ
+	 * @throws IOException  : ngoại lệ
+	 *
+	 */
+	public BufferedReader getBuff() throws FileNotFoundException, IOException {
+		FileInputStream fileInputStream = new FileInputStream(pathFile);   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
+		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);            // truyền đối tượng fileInputStream vào làm tham số cho đối tượng InputStreamReader
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);               // sử dụng đối tượng BufferedReader để đọc file
+        return bufferedReader;                                            // trả về bufferedReader
+	}
+	
+	
+	
+	/**
+	 * mục đích của hàm này là lấy chính xác kích thước của ma trận 3 chiều
 	 * đọc file và trả về số ma trận 5*5 của mảng hai chiều
 	 * bằng cách đọc số dòng rồi lấy số dòng chia cho 5 ta được độ dài của mảng 3 chiều chứa các ma trận 5*5
 	 * @return : trả về độ dài của mảng 3 chiều
@@ -27,18 +47,16 @@ public class FileLogic {
 	 *
 	 */
 	public void getLengthArray3() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\Data\\fileDich.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
-		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
-		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);            // truyền đối tượng fileInputStream vào làm tham số cho đối tượng InputStreamReader
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);               // sử dụng đối tượng BufferedReader để đọc file
+		BufferedReader bufferedReader = getBuff();
 		int length = 0;                                   // khởi tạo biến đếm số dòng  = 0
         while(bufferedReader.readLine() != null){       //  đọc từng dòng
         	length ++;                                  // mỗi lần đọc xong 1 đòng
         }   
         dataManagement.setLength(length/5);            // set giá trị độ dài của mảng 3 chiều bằng cách lấy số dòng chia 5 vì mỗi thế cờ có 5 dòng
-        fileInputStream.close();                       // đóng đối tượng
+       // fileInputStream.close();                       // đóng đối tượng
         bufferedReader.close();                       // đóng đối tượng
 	}
+	
 	
 	/**
 	 * đọc file , lấy dữ liệu từ file vào lưu vào 1 mảng 3 chiều 
@@ -46,11 +64,9 @@ public class FileLogic {
 	 * @throws IOException : ngoại lệ
 	 *
 	 */
-	public void readFileAndGetData() throws FileNotFoundException, IOException{
-		FileInputStream fileInputStream = new FileInputStream("src\\Data\\fileDich.txt");   // truyền địa chỉ file vào đối tượng FileInputStream để đọc file
-		//FileInputStream fileInputStream = new FileInputStream("src/Data/Theco/theco.txt");
-		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);           // truyền đối tượng fileInputStream vào làm tham số cho đối tượng InputStreamReader
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);          // sử dụng đối tượng BufferedReader để đọc file
+	public void readFileAndGetData() throws FileNotFoundException, IOException{	
+		BufferedReader bufferedReader = getBuff();
+
 		int length = dataManagement.getLength();                                        // nhận giá trị độ dài của mảng 3 chiều
 		String[][][] arrayContainingMatrix = new String[length][5][5];                // khởi tạo mảng 3 chiều
 		String lines = "";      // khởi tạo lines rỗnmg để đọc từng dòng
@@ -67,9 +83,12 @@ public class FileLogic {
         	}
         }
         dataManagement.setDataMatrix(arrayContainingMatrix);  // lưu trữ mảng 3 chiều để sử dụng cho logic sau
-        fileInputStream.close();  // đóng đối tượng
+       // fileInputStream.close();  // đóng đối tượng
         bufferedReader.close();   // đóng đối tượg
 	}
+	
+	
+	
 	
 	
 	/**
@@ -85,13 +104,6 @@ public class FileLogic {
 		return dataManagement.getDataMatrix();   // trả về mảng 3 chiều vừa lưu
 	}
 	
-	/*
-	 * trả về độ dài của mảng 3 chiều ( không cần thiết lắm ) 
-	 */
-//	public int lenOfArray3() throws FileNotFoundException, IOException {
-//		getLengthArray3();  // gọi hàm tính độ dài mảng 3 chiều
-//		return dataManagement.getLength();   // trả về độ dài mảng 3 chiều
-//	}
 
 	
 }
